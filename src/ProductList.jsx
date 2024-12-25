@@ -251,7 +251,6 @@ function ProductList() {
     };
 
    const handleContinueShopping = (e) => {
-    e.preventDefault();
     setShowCart(false);
   };
 
