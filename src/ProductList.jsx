@@ -250,8 +250,9 @@ function ProductList() {
         setShowCart(false); // Hide the cart when navigating to About Us
     };
 
-   const handleContinueShopping = (e) => {
+    const handleContinueShopping = (e) => {
     setShowCart(false);
+    setAddedToCart({}); // Reset addedToCart state
   };
 
   const handleAddToCart = (product) => {
@@ -260,6 +261,14 @@ function ProductList() {
      ...prevState,
      [product.name]: true, // Set the product name as key and value as true to indicate it's added to cart
    }));
+  };
+
+  const handleRemoveFromCart = (product) => { 
+    dispatch(removeItem(product.name)); 
+    setAddedToCart((prevState) => ({ 
+    ...prevState, 
+    [product.name]: false, 
+    })); 
   };
 
     return (
@@ -309,7 +318,7 @@ function ProductList() {
 
         </div>
  ) :  (
-    <CartItem onContinueShopping={handleContinueShopping}/>
+    <CartItem onContinueShopping={handleContinueShopping} onRemoveFromCart={handleRemoveFromCart} />
 )}
     </div>
     );
